@@ -10,7 +10,6 @@ import java.util.List;
 @Component
 public interface GuestBookService {
     MessageResponse createGuestBook(GuestBook guestBook);
-    MessageResponse updateGuestBook(Integer guestBookId, GuestBookRequest guestBookRequest);
     void deleteGuestBook(Integer guestBookId);
     GuestBook readGuestBook(Integer guestBookId);
     List<GuestBook> getAllGuestBook();

@@ -17,24 +17,9 @@ public class GuestBookImpl implements GuestBookService{
     private GuestBookRepository guestBookRepository;
     @Override
     public MessageResponse createGuestBook(GuestBook guestBook) {
-//        GuestBook newGuestBook = new GuestBook();
-//        newGuestBook.setName(guestBookRequest.getName());
-//        newGuestBook.setEmail(guestBookRequest.getEmail());
-//        newGuestBook.setMessage(guestBookRequest.getMessage());
         guestBookRepository.save(guestBook);
 
         return new MessageResponse("Guest Book created successfully");
-    }
-
-    @Override
-    public MessageResponse updateGuestBook(Integer guestBookId, GuestBookRequest guestBookRequest) {
-        GuestBook newGuestBook = guestBookRepository.findById(guestBookId).orElseThrow(() -> new GuestBookException("No Note with such Id"));
-        if (newGuestBook != null) {
-            newGuestBook.setEmail(guestBookRequest.getEmail());
-            newGuestBook.setMessage(guestBookRequest.getMessage());
-            guestBookRepository.save(newGuestBook);
-        }
-        return new MessageResponse("Note updated successfully");
     }
 
     @Override

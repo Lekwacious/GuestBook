@@ -23,7 +23,7 @@ public class GuestBookController {
     }
 
     @GetMapping("/home")
-    public String getAGuestBook(ModelMap modelMap){
+    public String getAllGuestBook(ModelMap modelMap){
         List<GuestBook> allGuestBook = guestBookService.getAllGuestBook();
         modelMap.put("allGuestBook", allGuestBook);
         return "homei";
@@ -41,19 +41,13 @@ public class GuestBookController {
         return "redirect:home";
     }
     @GetMapping("/showFormForUpdate/{id}")
-    public String showFormForUpdate(@PathVariable ( value = "id") Integer id, Model model) {
+    public String updateGuestBook(@PathVariable ( value = "id") Integer id, Model model) {
         GuestBook guestBook = guestBookService.getGuessBookById(id);
         model.addAttribute("guestBook", guestBook);
         return "update";
 
     }
 
-    @GetMapping("/update/{id}")
-    public String updateGuestBook(@PathVariable(value = "id") Integer id, Model model){
-     Optional<GuestBook> guestBook = guestBookRepository.findById(id);
-     model.addAttribute("guestBook", guestBook );
-        return "update";
-    }
     @GetMapping("/guestboot/{guestBookId}")
     public String GetASingleGuestBook(@PathVariable Integer guestBookId,ModelMap modelMap){
        GuestBook guestbook = guestBookRepository.findById(guestBookId).orElse(null);
@@ -61,7 +55,7 @@ public class GuestBookController {
        return "details";
     }
     @GetMapping("/delete-guestbook/{id}")
-    public String deleteNote(@PathVariable(value ="id") Integer id ){
+    public String deleteGuestBook(@PathVariable(value ="id") Integer id ){
         guestBookService.deleteGuestBook(id);
         return "redirect:/home";
     }
